@@ -8,15 +8,28 @@ print(snd(fst(x)))
 
 --- 
 ### Задание 2
-## 1
+#### 1
 ```
 let x = ['a', 'b', 'c']
 print(head(tail(x)))
 ```
-## 2
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/44090185-8ebe-483d-b3d2-132f7e3999b2)
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/22d78168-12e2-4f07-a60b-c79df6c0c0ff)
+
+#### 2
 ```
-getB x = tail (head x)
+let x = [['a', 'b'], ['c','d']]
+print(head(tail(head(x))))
 ```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/1bcc3096-a9bd-4ebf-9388-6acff2e26c66)
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/dec41405-d048-4a1c-8140-cd6814c71b7f)
+
+#### 3
+```
+let x = [['a', 'b'], ['c','d']]
+print(head(tail(head(x))))
+```
+
 ---
 ### Задание 3
 
