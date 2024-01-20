@@ -26,9 +26,17 @@ print(head(tail(head(x))))
 
 #### 3
 ```
-let x = [['a', 'b'], ['c','d']]
-print(head(tail(head(x))))
+let x = [['a', 'c', 'd'], ['a','b']]
+print(head(tail(head(tail(x)))))
 ```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/59fa1ca6-537d-45e4-a626-f7e2c90a5b5a)
+
+#### 4
+```
+let x =  [['a','d'], ['b', 'c']]
+print(head(head(tail(x))))
+```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/c1cbb117-9033-4fab-bd99-1ae998ec4613)
 
 ---
 ### Задание 3
