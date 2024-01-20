@@ -8,10 +8,12 @@ print(snd(fst(x)))
 
 --- 
 ### Задание 2
+## 1
 ```
-getB x = head (tail x)
+let x = ['a', 'b', 'c']
+print(head(tail(x)))
 ```
-
+## 2
 ```
 getB x = tail (head x)
 ```
