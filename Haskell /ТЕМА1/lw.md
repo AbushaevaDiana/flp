@@ -45,11 +45,31 @@ print(head(head(tail(x))))
 ```
 createListOfOddNaturalNumbers :: Integer -> [Integer]
 createListOfOddNaturalNumbers x = [1, 3..2*x-1] 
-
 main :: IO ()
 main =  do print(createListOfOddNaturalNumbers 20)
 ```
 ![image](https://github.com/AbushaevaDiana/flp/assets/79981087/9c2cff77-c08e-4915-a813-d76928ac83c0)
+
+#### 2)
+```
+createListOfOddNaturalNumbers :: Integer -> [Integer]
+createListOfOddNaturalNumbers x = filter odd [1..2 * x]
+main :: IO ()
+main =  do print(createListOfOddNaturalNumbers 20)
+```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/bff1faec-7d87-4ab6-a661-72dfe53c50e8)
+
+#### 3)
+```
+isOdd :: Integer -> Bool
+isOdd x = (mod x 2) /= 0
+createListOfOddNaturalNumbers :: Integer -> [Integer]
+createListOfOddNaturalNumbers x = filter isOdd [1..2 * x]
+main :: IO ()
+main =  do let x = 20
+           print(createListOfOddNaturalNumbers x)
+```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/ccc21b59-3f5b-4465-a278-dac367c0be59)
 
 ---
 ### Задание 4
