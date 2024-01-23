@@ -85,3 +85,12 @@ main =  do let count = 50
 
 ---
 ### Задание 5
+```
+toPyramidal :: Integer -> Integer
+toPyramidal x = (2 * x^3 + 3 * x^2 + x) `div` 6
+main :: IO ()
+main =  do let count = 50
+           let listOfPyramidalFermatNumbers = map toPyramidal [1..count]
+           print(listOfPyramidalFermatNumbers)
+```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/86508ae0-233e-473d-8403-43ac29618306)
