@@ -73,6 +73,15 @@ main =  do let x = 20
 
 ---
 ### Задание 4
+```
+toTriangular :: Integer -> Integer
+toTriangular x = x*(x+1) `div` 2
+main :: IO ()
+main =  do let count = 50
+           let listOfTriangularFermatNumbers = map toTriangular [1..count]
+           print(listOfTriangularFermatNumbers)
+```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/005ea081-83b7-4e57-917e-ae993b061743)
 
 ---
 ### Задание 5
