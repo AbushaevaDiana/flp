@@ -41,6 +41,19 @@ print(head(head(tail(x))))
 ---
 ### Задание 3
 
+#### 1)
+```
+createOddNaturalNumber :: Integer -> Integer
+createOddNaturalNumber x = (2*x-1)
+
+createListOfOddNaturalNumbers :: Integer -> [Integer]
+createListOfOddNaturalNumbers x = [1, 3..2*x-1] 
+
+main :: IO ()
+main =  do print(createListOfOddNaturalNumbers 20)
+```
+![image](https://github.com/AbushaevaDiana/flp/assets/79981087/66e7ac44-bec1-4878-bd3f-fbd5a36b638e)
+
 ---
 ### Задание 4
 
