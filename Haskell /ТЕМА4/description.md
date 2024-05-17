@@ -1,5 +1,5 @@
 1)
-Название: transpose  
+Название: List.transpose  
 Тип: [[a]] -> [[a]] 
 Описание: принимает 2d  матрицу и транспонирует строки и столбцы своего аргумента 
 Примеры:  
@@ -23,7 +23,7 @@ myTranspose x = (map head x) : myTranspose (map tail x)
 ```
 ---
 2)
-Название: singleton  
+Название: Map.singleton  
 Тип: k -> a -> Map k a 
 Описание: принимает на вход два элемента и возвращает словарь с единственным элементом у которого ключ это первый принятый элемент,
 а значение второму принятому элементу
@@ -42,6 +42,29 @@ singleton [1] "4"
 ```
 mySingleton :: Ord k => k -> a -> Map.Map k a
 mySingleton key value = Map.fromList [(key, value)]
+
+```
+---
+
+3)
+Название: Set.union  
+Тип: Set a -> Bool 
+Описание: обьединяет два множества в одно
+Примеры:  
+1)   
+Set.union (fromList " .?AIRadefhijlmnorstuy") (fromList " !Tabcdefghilmnorstuvwy")   
+Результат: " !.?AIRTabcdefghijlmnorstuvwy"
+2)  
+Set.union (Set.empty) (Set.fromList " !Tabcdefghilmnorstuvwy")  
+Результат: " !Tabcdefghilmnorstuvwy"
+3)  
+Set.union (Set.fromList [3,4,5,3, 4,5]) (Set.fromList [1, 1, 1, 5])  
+Результат: [1,3,4,5] 
+
+Реализация:   
+```
+myUnion :: Ord a => Set.Set a -> Set.Set a -> Set.Set a
+myUnion s1 s2 = Set.foldr Set.insert s1 s2
 
 ```
 ---
