@@ -7,8 +7,8 @@
 transpose [[1,2,3],[4,5,6],[7,8,9]]  
 Результат: [[1,4,7],[2,5,8],[3,6,9]]  
 2)  
-transpose ["hey","there","guys"]  
-Результат: ["htg","ehu","yey","rs","e"] 
+transpose ["hey","the","guy"]  
+Результат: ["htg","ehu","yey"] 
 
 Реализация:   
 ```
