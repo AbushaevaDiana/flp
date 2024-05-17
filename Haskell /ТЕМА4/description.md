@@ -85,8 +85,8 @@ Char.isControl '9'
 
 Реализация:   
 ```
-isControl :: Char -> Bool
-isControl c = (fromEnum c) < 32 || (fromEnum c) == 127
+myIControl :: Char -> Bool
+myIsControl c = (fromEnum c) < 32 || (fromEnum c) == 127
 
 ```
 ---
