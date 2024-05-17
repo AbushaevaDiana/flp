@@ -12,7 +12,10 @@ transpose ["hey","there","guys"]
 
 Реализация:   
 ```
-myTranspose :: [[a]] -> [[a]] 
+myTranspose :: [[a]] -> [[a]]
+myTranspose [] = []
+myTranspose ([]:_) = []
+myTranspose x = (map head x) : myTranspose (map tail x)
 
 ```
 ---
