@@ -68,3 +68,10 @@ myUnion s1 s2 = Set.foldr Set.insert s1 s2
 
 ```
 ---
+
+Вопросы
+Какой результат будет у следующего выражения:  transpose ["hey","the","guy"] 
+Какой результат будет у следующего выражения:  Set.union (fromList "Hey - Ho") (fromList "Hi, hi, hi")   
+
+```
+---
