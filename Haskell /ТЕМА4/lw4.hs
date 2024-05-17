@@ -1,6 +1,7 @@
 import System.IO
 import qualified Data.Map as Map
 import qualified Data.Set as Set
+import qualified Data.Char as Char
 
 
 -- Собственная реализация функции transpose
@@ -16,6 +17,10 @@ mySingleton key value = Map.fromList [(key, value)]
 -- Собственная реализация функции union
 myUnion :: Ord a => Set.Set a -> Set.Set a -> Set.Set a
 myUnion s1 s2 = Set.foldr Set.insert s1 s2
+
+-- Собственная реализация функции isControl
+myIsControl :: Char.Char -> Bool
+myIsControl c = (fromEnum c) < 32 || (fromEnum c) == 127
 
 
 main :: IO ()
@@ -40,3 +45,9 @@ main = do
 
   print(myUnion (Set.empty) (Set.fromList " !Tabcdefghilmnorstuvwy"))
 -- Ожидаемый вывод: " !.?AIRTabcdefghijlmnorstuvwy"
+
+  print(myIsControl 'A')
+-- Ожидаемый вывод: False
+
+  print(myIsControl '\n')
+-- Ожидаемый вывод: True
