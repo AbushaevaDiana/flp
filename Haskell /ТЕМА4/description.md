@@ -109,14 +109,17 @@ Char.isLower '9'
 
 Реализация:   
 ```
-myIsLower :: Char -> Bool
-myIsLower c = ord c >= ord 'a' && ord c <= ord 'z'
+myIsLower :: Char.Char -> Bool
+myIsLower c = Char.ord c >= Char.ord 'a' && Char.ord c <= Char.ord 'z'
 
 ```
 ---
 
 Вопросы
+
 Какой результат будет у следующего выражения:  transpose ["hey","the","guy"] 
+
+
 Какой результат будет у следующего выражения:  Set.union (fromList "Hey - Ho") (fromList "Hi, hi, hi")   
 
 ```
