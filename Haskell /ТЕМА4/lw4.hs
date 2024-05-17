@@ -1,4 +1,5 @@
 import System.IO
+import qualified Data.Map as Map
 
 
 -- Собственная реализация функции transpose
@@ -6,6 +7,10 @@ myTranspose :: [[a]] -> [[a]]
 myTranspose [] = []
 myTranspose ([]:_) = []
 myTranspose x = map head x : myTranspose (map tail x)
+
+-- Собственная реализация функции singleton
+mySingleton :: Ord k => k -> a -> Map.Map k a
+mySingleton key value = Map.fromList [(key, value)]
 
 main :: IO ()
 
@@ -17,3 +22,9 @@ main = do
   let nonSquareMatrix = ["hey","the","guy"]
   print (myTranspose nonSquareMatrix)
 -- Ожидаемый вывод: [[1,3,5],[2,4,6]]
+
+  print (mySingleton 1 "4")
+-- Ожидаемый вывод: fromList [(1,"4")]
+
+  print (mySingleton [1] "4")
+-- Ожидаемый вывод: fromList [([1],"4")]
