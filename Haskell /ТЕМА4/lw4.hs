@@ -1,5 +1,6 @@
 import System.IO
 import qualified Data.Map as Map
+import qualified Data.Set as Set
 
 
 -- Собственная реализация функции transpose
@@ -11,6 +12,11 @@ myTranspose x = map head x : myTranspose (map tail x)
 -- Собственная реализация функции singleton
 mySingleton :: Ord k => k -> a -> Map.Map k a
 mySingleton key value = Map.fromList [(key, value)]
+
+-- Собственная реализация функции union
+myUnion :: Ord a => Set.Set a -> Set.Set a -> Set.Set a
+myUnion s1 s2 = Set.foldr Set.insert s1 s2
+
 
 main :: IO ()
 
@@ -28,3 +34,9 @@ main = do
 
   print (mySingleton [1] "4")
 -- Ожидаемый вывод: fromList [([1],"4")]
+
+  print(myUnion (Set.fromList " .?AIRadefhijlmnorstuy") (Set.fromList " !Tabcdefghilmnorstuvwy"))
+-- Ожидаемый вывод: " !.?AIRTabcdefghijlmnorstuvwy"
+
+  print(myUnion (Set.empty) (Set.fromList " !Tabcdefghilmnorstuvwy"))
+-- Ожидаемый вывод: " !.?AIRTabcdefghijlmnorstuvwy"
