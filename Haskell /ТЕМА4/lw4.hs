@@ -20,8 +20,11 @@ myUnion s1 s2 = Set.foldr Set.insert s1 s2
 
 -- Собственная реализация функции isControl
 myIsControl :: Char.Char -> Bool
-myIsControl c = (fromEnum c) < 32 || (fromEnum c) == 127
+myIsControl c = (Char.ord c) < 32 || (Char.ord c) == 127
 
+-- Собственная реализация функции isLower
+myIsLower :: Char.Char -> Bool
+myIsLower c = Char.ord c >= Char.ord 'a' && Char.ord c <= Char.ord 'z'
 
 main :: IO ()
 
@@ -51,3 +54,9 @@ main = do
 
   print(myIsControl '\n')
 -- Ожидаемый вывод: True
+
+  print(myIsLower 'a')
+-- Ожидаемый вывод: True
+
+  print(myIsLower '9')
+-- Ожидаемый вывод: False
