@@ -68,6 +68,28 @@ myUnion s1 s2 = Set.foldr Set.insert s1 s2
 
 ```
 ---
+4)
+Название: Char.isControl 
+Тип: Char -> Bool 
+Описание:  проверяет, является ли указанный символ управляющим символом
+Примеры:  
+1)   
+Char.isControl 'A'
+Результат: False
+2)  
+Char.isControl '\n'
+Результат: True
+3)  
+Char.isControl '9'
+Результат: False
+
+Реализация:   
+```
+isControl :: Char -> Bool
+isControl c = (fromEnum c) < 32 || (fromEnum c) == 127
+
+```
+---
 
 Вопросы
 Какой результат будет у следующего выражения:  transpose ["hey","the","guy"] 
