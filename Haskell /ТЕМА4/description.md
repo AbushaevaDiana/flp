@@ -85,8 +85,31 @@ Char.isControl '9'
 
 Реализация:   
 ```
-myIControl :: Char -> Bool
-myIsControl c = (fromEnum c) < 32 || (fromEnum c) == 127
+myIsControl :: Char.Char -> Bool
+myIsControl c = (Char.ord c) < 32 || (Char.ord c) == 127
+
+```
+---
+
+5)
+Название: Char.isLower 
+Тип: Char -> Bool 
+Описание:  проверяет, является ли указанный символ управляющим символом
+Примеры:  
+1)   
+Char.isLower 'A'
+Результат: False
+2)  
+Char.isLower 'a'
+Результат: True
+3)  
+Char.isLower '9'
+Результат: False
+
+Реализация:   
+```
+myIsLower :: Char -> Bool
+myIsLower c = ord c >= ord 'a' && ord c <= ord 'z'
 
 ```
 ---
