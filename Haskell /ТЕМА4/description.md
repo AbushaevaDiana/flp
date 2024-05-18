@@ -117,10 +117,11 @@ myIsLower c = Char.ord c >= Char.ord 'a' && Char.ord c <= Char.ord 'z'
 
 Вопросы
 
-Какой результат будет у следующего выражения:  transpose ["hey","the","guy"] 
+	
+Результат выражения: Set.union
 
 
-Какой результат будет у следующего выражения:  Set.union (fromList "Hey - Ho") (fromList "Hi, hi, hi")   
+Результат выражения: transpose
 
 ```
 ---
