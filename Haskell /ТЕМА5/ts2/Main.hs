@@ -14,18 +14,23 @@ replacePunctuation inFileName outputFileName replaceChar = do
 main :: IO()
 main = do
   args <- getArgs
-  if length args /= 3
+  if length args /= 2
     then putStrLn "Неверное количество входных параметров"
     else do
       let inFileName = args !! 0
       let outputFileName = args !! 1
-      let replaceChar = head (args !! 2)
-      inputFileExists <- doesFileExist inFileName 
-      outputFileExists <- doesFileExist outputFileName 
-      if not (inputFileExists && outputFileExists)
-        then putStrLn "Файлы не найдены"
+      putStrLn "Введите символ на замену пунктуации: "
+      input <- getLine
+      if length input /= 1
+        then putStrLn "Ошибка: нужно ввести один символ"
         else do
-          replacePunctuation inFileName outputFileName replaceChar
-          putStrLn $ "Пунктуация из входного файла " ++ show inFileName ++ " была заменена на символ " ++ show replaceChar ++ " в выходном файле " ++ show outputFileName
+          let replaceChar = head input
+          inputFileExists <- doesFileExist inFileName 
+          outputFileExists <- doesFileExist outputFileName 
+          if not (inputFileExists && outputFileExists)
+            then putStrLn "Файлы не найдены"
+            else do
+              replacePunctuation inFileName outputFileName replaceChar
+              putStrLn $ "Пунктуация из входного файла " ++ show inFileName ++ " была заменена на символ " ++ show replaceChar ++ " в выходном файле " ++ show outputFileName
 
 --"Формат ввода: :main <входящий файл> <выходящий файл> <символ, на который заменяем>"
