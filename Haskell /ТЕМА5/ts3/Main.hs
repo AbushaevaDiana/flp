@@ -1,45 +1,72 @@
-import Data.List (delete)
+import Data.List(delete)
 import System.Environment
 import System.IO
-import Text.Read (readMaybe)
+import Data.Char(isDigit)
 
-convert :: String -> Maybe Int
-convert str = readMaybe str :: Maybe Int
+viewFile :: String -> IO ()
+viewFile inFileName = do
+  content <- readFile inFileName
+  putStrLn $ "Файл " ++ inFileName ++ " содержит следующую информацию:" 
+  putStrLn content
 
-viewFile :: FilePath -> IO ()
-viewFile path = do
-  contents <- readFile path
-  putStrLn contents
+appendDataFile :: String -> String -> IO ()
+appendDataFile inFileName newContent = do
+  appendFile inFileName (newContent ++ "\n")
+  putStrLn $ "В файл " ++ inFileName ++ " была добавлена строка:"  ++ newContent
 
-appendDataFile :: FilePath -> String -> IO ()
-appendDataFile path newContent = do
-  appendFile path (newContent ++ "\n")
+removeLineFromFile :: String -> Int -> IO ()
+removeLineFromFile inFileName lineNumber = do
+  if lineNumber <= 0 
+    then putStrLn "Недопустимый номер строки"
+    else do
+      input <- readFile inFileName
+      let lineList = lines input
+      if length lineList < (lineNumber - 1)
+        then putStrLn "Номер строки привышает количество строк в файле"
+        else do
+          let output = unlines $ delete (lineList !! (lineNumber - 1)) lineList
+          writeFile inFileName output
 
-removeLineFromFile :: FilePath -> Int -> IO ()
-removeLineFromFile path lineNumber = do
-  contents <- readFile path
-  let lineList = lines contents
-  let updatedContent = unlines $ delete (lineList !! (lineNumber - 1)) lineList
-  writeFile path updatedContent
+copyFileWithLengthFilter :: String -> String -> Int -> IO ()
+copyFileWithLengthFilter inFileName outputFileName filterLength = do
+  input <- readFile inFileName
+  let output = unlines $ filter (\line -> length line <= filterLength) (lines input)
+  writeFile outputFileName output
+  putStrLn
+  putStrLn $ "Строки длина которых не превышает " ++ filterLength " из файла" ++ inFileName ++ " скопированы в файл:"  ++ outputFileName
 
-copyFileWithLengthFilter :: FilePath -> FilePath -> Int -> IO ()
-copyFileWithLengthFilter sourcePath destPath filterLength = do
-  contents <- readFile sourcePath
-  let filteredContent = unlines $ filter (\line -> length line <= filterLength) (lines contents)
-  writeFile destPath filteredContent
+copyFileWithLengthFilter :: String -> String -> Int -> IO ()
+copyFileWithLengthFilter inFileName outputFileName filterLength = do
+  input <- readFile inFileName
+  let output = unlines $ filter (\line -> isDigit (head line)) (lines input)
+  writeFile outputFileName output
+  putStrLn
+  putStrLn $ "Строки начинающиеся с цифры, из файла" ++ inFileName ++ " скопированы в файл:"  ++ outputFileName
 
 main :: IO ()
 main = do
-  putStrLn "Введите данные в таком формате: "
+  putStrLn "Подсказка: "
   putStrLn "просмотр файла - :main viewFile [имя входного файла]"
   putStrLn "добавление информации в файл - :main appendDataFile [имя входного файла] [добавляемая информация]"
   putStrLn "удаление строки из файла - :main removeLineFromFile [имя входного файла] [номер строки]"
-  putStrLn "Копирование файла с фильтром - :main copyFileWithLengthFilter [имя входного файла] [длина строки] [имя выходного файла]"
+  putStrLn "копирование файла с фильтром по длине строки - :main copyFileWithLengthFilter [имя входного файла] [длина строки] [имя выходного файла]"
+  putStrLn "копирование строк файла, которые начинаются с цифры - :main copyFileWithDigitFilter [имя входного файла] [имя выходного файла]"
+  putStrLn "Результат: "
 
-  listArgs <- getArgs
-
-  case (listArgs !! 0) of
-    "viewFile" -> viewFile (listArgs !! 1)
-    "appendDataFile" -> appendDataFile (listArgs !! 1) (listArgs !! 2)
-    "removeLineFromFile" -> removeLineFromFile (listArgs !! 1) (read (listArgs !! 2) :: Int)
-    "copyFileWithLengthFilter" -> copyFileWithLengthFilter (listArgs !! 1) (listArgs !! 3) (read (listArgs !! 2) :: Int)
+  args <- getArgs
+  if length args < 2
+    then putStrLn "Неверное количество входных параметров"
+    else do
+    listArgs <- getArgs
+    let functionName = args !! 0
+    let inFileName = args !! 1
+    inputFileExists <- doesFileExist inFileName 
+    if not inputFileExists
+      then putStrLn "Файл не найден"
+      else do
+        case (functionName) of
+          "viewFile" -> viewFile (inFileName)
+          "appendDataFile" -> appendDataFile (inFileName) (listArgs !! 2)
+          "removeLineFromFile" -> removeLineFromFile (inFileName) (read (listArgs !! 2) :: Int)
+          "copyFileWithLengthFilter" -> copyFileWithLengthFilter (inFileName) (listArgs !! 3) (read (listArgs !! 2) :: Int)
+          "copyFileWithDigitFilter" -> copyFileWithDigitFilter (inFileName) (listArgs !! 3)
