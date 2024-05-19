@@ -1,7 +1,9 @@
 import System.IO
--- Вывести на экран сформированный список, данные для которого вводятся с клавиатуры: начальное значение, количество элементов, кратность.
+-- Вывести на экран сформированный список, 
+-- данные для которого вводятся с клавиатуры: начальное значение, количество элементов, кратность.
 generateList :: Int -> Int -> Int -> [Int]
-generateList initialValue numElements multipleFactor = [initialValue, initialValue + multipleFactor .. initialValue + (numElements - 1) * multipleFactor]
+generateList start count factor = 
+    take count [x | x <- [start, start + 1 ..], mod x factor == 0]
 
 main :: IO ()
 
