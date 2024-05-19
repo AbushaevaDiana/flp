@@ -58,28 +58,42 @@ copyFileWithDigitFilter inFileName outputFileName = do
 main :: IO ()
 main = do
   putStrLn "Подсказка: "
-  putStrLn "просмотр файла - :main viewFile [имя входного файла]"
-  putStrLn "добавление информации в файл - :main appendDataFile [имя входного файла] [добавляемая информация]"
-  putStrLn "удаление строки из файла - :main removeLineFromFile [имя входного файла] [номер строки]"
-  putStrLn "копирование файла с фильтром по длине строки - :main copyFileWithLengthFilter [имя входного файла] [длина строки] [имя выходного файла]"
-  putStrLn "копирование строк файла, которые начинаются с цифры - :main copyFileWithDigitFilter [имя входного файла] [имя выходного файла]"
-  putStrLn "Результат: "
-
+  putStrLn "просмотр файла - viewFile"
+  putStrLn "добавление информации в файл - appendDataFile"
+  putStrLn "удаление строки из файла - removeLineFromFile"
+  putStrLn "копирование файла с фильтром по длине строки - copyFileWithLengthFilter"
+  putStrLn "копирование строк файла, которые начинаются с цифры - copyFileWithDigitFilter"
+  
   args <- getArgs
-  if length args < 2
+  if length args < 1
     then putStrLn "Неверное количество входных параметров"
     else do
-    listArgs <- getArgs
-    let functionName = args !! 0
-    let inFileName = args !! 1
+    let inFileName = args !! 0
     inputFileExists <- doesFileExist inFileName 
     if not inputFileExists
       then putStrLn "Файл не найден"
       else do
+        putStrLn "Введите вид работ согласно подсказке: "
+        functionName <- getLine
         case (functionName) of
-          "viewFile" -> viewFile (inFileName)
-          "appendDataFile" -> appendDataFile (inFileName) (listArgs !! 2)
-          "removeLineFromFile" -> removeLineFromFile (inFileName) (read (listArgs !! 2) :: Int)
-          "copyFileWithLengthFilter" -> copyFileWithLengthFilter (inFileName) (listArgs !! 3) (read (listArgs !! 2) :: Int)
-          "copyFileWithDigitFilter" -> copyFileWithDigitFilter (inFileName) (listArgs !! 2)
+          "viewFile" -> viewFile inFileName
+          "appendDataFile" -> do
+            putStrLn "Введите строку, которую хотите добавить: "
+            newContent <- getLine
+            appendDataFile inFileName newContent
+          "removeLineFromFile" -> do
+            putStrLn "Введите номер строки, которую хотите удалить: "
+            lineNumber <- getLine
+            removeLineFromFile (inFileName) (read (lineNumber) :: Int)
+          "copyFileWithLengthFilter" -> if length args < 2
+            then putStrLn "Неверное количество входных параметров для этой функции"
+            else do
+              putStrLn "Введите максимальную длину строки для копирования: "
+              filterLength <- getLine
+              copyFileWithLengthFilter inFileName (args !! 1) (read (filterLength) :: Int)
+          "copyFileWithDigitFilter" -> if length args < 2
+            then putStrLn "Неверное количество входных параметров для этой функции"
+            else copyFileWithDigitFilter inFileName (args !! 1)
           _ -> putStrLn "Не найдено такой команды"
+
+--Формат ввода: :main <входящий файл> <выходящий файл>
